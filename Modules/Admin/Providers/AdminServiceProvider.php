@@ -2,8 +2,8 @@
 
 namespace Modules\Admin\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\ServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -28,7 +28,9 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->loadMigrationsFrom(
+            module_path($this->moduleName, 'Database/Migrations')
+        );
     }
 
     /**
@@ -48,11 +50,18 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function registerConfig()
     {
-        $this->publishes([
-            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
-        ], 'config');
+        $this->publishes(
+            [
+                module_path(
+                    $this->moduleName,
+                    'Config/config.php'
+                ) => config_path($this->moduleNameLower . '.php'),
+            ],
+            'config'
+        );
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 
@@ -67,11 +76,17 @@ class AdminServiceProvider extends ServiceProvider
 
         $sourcePath = module_path($this->moduleName, 'Resources/views');
 
-        $this->publishes([
-            $sourcePath => $viewPath
-        ], ['views', $this->moduleNameLower . '-module-views']);
+        $this->publishes(
+            [
+                $sourcePath => $viewPath,
+            ],
+            ['views', $this->moduleNameLower . '-module-views']
+        );
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+        $this->loadViewsFrom(
+            array_merge($this->getPublishableViewPaths(), [$sourcePath]),
+            $this->moduleNameLower
+        );
     }
 
     /**
@@ -86,7 +101,10 @@ class AdminServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         } else {
-            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
+            $this->loadTranslationsFrom(
+                module_path($this->moduleName, 'Resources/lang'),
+                $this->moduleNameLower
+            );
         }
     }
 
@@ -97,8 +115,13 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
+        if (
+            !app()->environment('production') &&
+            $this->app->runningInConsole()
+        ) {
+            app(Factory::class)->load(
+                module_path($this->moduleName, 'Database/factories')
+            );
         }
     }
 
