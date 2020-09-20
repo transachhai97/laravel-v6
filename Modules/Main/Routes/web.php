@@ -11,6 +11,4 @@
 |
 */
 
-Route::prefix('main')->group(function () {
-    Route::get('/', 'MainController@index');
-});
+Route::get('/', 'MainController@index');

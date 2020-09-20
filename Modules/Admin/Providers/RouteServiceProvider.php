@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Providers;
 
+use App\Providers\RouteServiceProvider as RouteProvide;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +48,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::domain(RouteProvide::baseDomain('admin'))
+            ->middleware('web')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Admin', '/Routes/web.php'));
     }

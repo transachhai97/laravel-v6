@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+        //        $this->mapWebRoutes();
 
         //
     }
@@ -76,5 +76,14 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    public static function baseDomain(string $subdomain = ''): string
+    {
+        if (strlen($subdomain) > 0) {
+            $subdomain = "{$subdomain}.";
+        }
+
+        return $subdomain . config('app.base_domain');
     }
 }
