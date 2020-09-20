@@ -12,3 +12,8 @@
 */
 
 Route::get('/', 'AdminController@index');
+
+Route::get('maintenance/{mode}', 'MaintenanceController')->where(
+    'mode',
+    'up|down'
+);
