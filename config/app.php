@@ -167,6 +167,8 @@ return [
          */
         // Debug
         App\Providers\DebugServiceProvider::class,
+        // Helper
+        App\Providers\HelperServiceProvider::class,
 
         /*
          * Application Service Providers...
