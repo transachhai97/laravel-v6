@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        // Debug
+        App\Providers\DebugServiceProvider::class,
 
         /*
          * Application Service Providers...
