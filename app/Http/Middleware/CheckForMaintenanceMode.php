@@ -75,7 +75,7 @@ class CheckForMaintenanceMode extends Middleware
 
             if (
                 $request->is($except) ||
-                $request->fullUrlIs('*.' . config('app.base_domain'))
+                $request->fullUrlIs('*.' . config('app.base_domain') . '*')
             ) {
                 return true;
             }
